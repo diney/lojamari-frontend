@@ -8,6 +8,14 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-<p>Página de categorias</p>
-</ion-content>
+
+      <ion-content>
+      
+        <ion-list>
+          <button ion-item *ngFor="let item of items" >
+     
+            <h2> {{ item.nome }} </h2>
+          </button>
+        </ion-list>
+      </ion-content>
+
