@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Novo Cliente</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <form [formGroup]="formGroup" (ngSubmit)="adicionar(); $event.preventDefault()">
+      <ion-item>
+        <ion-label stacked>Nome</ion-label>
+        <ion-input formControlName="nome" type="text"></ion-input>
+      </ion-item>
+      <p class="danger" *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors" margin-left>Valor inválido</p>
+      <ion-item>     
+          <ion-label stacked>Telefone </ion-label>
+          <ion-input formControlName="telefone" type="text"></ion-input>
+        </ion-item>
+      <ion-item>
+        <ion-label stacked>Email</ion-label>
+        <ion-input formControlName="email" type="text"></ion-input>
+      </ion-item>    
+     
+     
+      <button ion-button block type="submit" [disabled]="formGroup.invalid">Adicionar</button>
+    </form>
+  </ion-content>

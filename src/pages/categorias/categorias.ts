@@ -12,6 +12,7 @@ import { CategoriaDTO } from '../../models/categoria.dto';
 export class CategoriasPage {
 
   items:CategoriaDTO[];
+  
 
   constructor(
      public navCtrl: NavController,
@@ -20,6 +21,8 @@ export class CategoriasPage {
   }
 
   ionViewDidLoad() {
+   
+   
     this.categoriaService.findAll()
     .subscribe(response =>{
       this.items = response;
@@ -27,6 +30,9 @@ export class CategoriasPage {
     },
     error => { });
     
+  }
+  showProdutos(categoria_id : string){
+    this.navCtrl.push('ProdutosPage', {categoria_id : categoria_id});
   }
 
 }

@@ -1,0 +1,32 @@
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Clientes</ion-title>
+  </ion-navbar>
+    <ion-toolbar>
+      <ion-searchbar placeholder="Buacar"
+                      [(ngModel)]="queryText"
+                      (ionInput)="filterCliente($event)"
+                      clearInput>
+      </ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+
+      <ion-content padding>
+      
+        <ion-list>
+          <button ion-item *ngFor="let item of items" (click) ="showCategorias(item.id)">
+     
+            <h2> {{ item.nome }} </h2>
+          
+          </button>
+        </ion-list>
+        <ion-fab right bottom>
+            <button ion-fab (click)="novo()"><ion-icon name="add"></ion-icon></button>
+           
+          </ion-fab>
+      </ion-content>
