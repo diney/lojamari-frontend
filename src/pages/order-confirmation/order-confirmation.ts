@@ -37,7 +37,7 @@ export class OrderConfirmationPage {
     this.clienteService.findById(this.pedido.cliente.id)
       .subscribe(response => {
         this.cliente = response as ClienteDTO;
-       
+     
       },
       error => {
         this.navCtrl.setRoot('HomePage');
@@ -50,19 +50,29 @@ export class OrderConfirmationPage {
 
   total() : number {
     return this.cartService.total();
-  } 
+  }
+  
+  home() {
+    this.navCtrl.setRoot('CategoriasPage');
+  }
 
   checkout(){
     this.pedidoService.insert(this.pedido)
     .subscribe(response => {
       this.cartService.createOrClearCart();
-      console.log(response.headers.get('location'));
-
+      this.codpedido = this.extractId(response.headers.get('location'));
+   
+    
     },
     error => {
       if(error.status == 403){
         this.navCtrl.setRoot('HomePage');
       }
     })
+  }
+
+  private extractId(location: string):string {
+    let position = location.lastIndexOf('/');
+    return location.substring( position + 1 , location.length);
   }
 }
