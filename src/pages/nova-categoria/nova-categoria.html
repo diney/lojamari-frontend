@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-      <ion-title>Novo Cliente</ion-title>
+      <ion-title>Nova Categoria</ion-title>
     </ion-navbar>
   </ion-header>
   
@@ -11,15 +11,10 @@
         <ion-input formControlName="nome" type="text"></ion-input>
       </ion-item>
       <p class="danger" *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors" margin-left>Valor inválido</p>
-      <ion-item>     
-          <ion-label stacked>Telefone </ion-label>
-          <ion-input formControlName="telefone" type="text"></ion-input>
-        </ion-item>
-       
+     
      
      
       <button ion-button block type="submit" [disabled]="formGroup.invalid">Adicionar</button>
-    
+      <button ion-button block outline (click)=" back()">Voltar</button>
     </form>
-    <button ion-button block outline (click)=" back()">Voltar</button>
   </ion-content>

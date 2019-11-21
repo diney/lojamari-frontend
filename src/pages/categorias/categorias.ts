@@ -35,4 +35,10 @@ export class CategoriasPage {
     this.navCtrl.push('ProdutosPage', {categoria_id : categoria_id});
   }
 
+  novo() {
+    // this.navCtrl.push('NovoClientePage');
+     this.navCtrl.setRoot('NovaCategoriaPage');
+   }
+
+  
 }

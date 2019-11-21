@@ -6,6 +6,7 @@ import { ClienteDTO } from '../../models/cliente.dto';
 import { ClienteService } from '../../services/domain/cliente.service';
 import { CartService } from '../../services/domain/cart.service';
 import { PedidoService } from '../../services/domain/pedido.service';
+import { StorageService } from '../../services/storage.service';
 
 
 
@@ -25,6 +26,7 @@ export class OrderConfirmationPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public clienteService: ClienteService,
+    public storage: StorageService,
     public cartService: CartService ,
     public pedidoService:PedidoService) {
 
@@ -53,13 +55,14 @@ export class OrderConfirmationPage {
   }
   
   home() {
-    this.navCtrl.setRoot('CategoriasPage');
+    this.navCtrl.setRoot('ClientesPage');
   }
 
   checkout(){
     this.pedidoService.insert(this.pedido)
     .subscribe(response => {
       this.cartService.createOrClearCart();
+      let usr = this.storage.renoveCliente()
       this.codpedido = this.extractId(response.headers.get('location'));
    
     
@@ -68,7 +71,8 @@ export class OrderConfirmationPage {
       if(error.status == 403){
         this.navCtrl.setRoot('HomePage');
       }
-    })
+    });
+     
   }
 
   private extractId(location: string):string {

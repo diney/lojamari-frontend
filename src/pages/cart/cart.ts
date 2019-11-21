@@ -8,6 +8,7 @@ import { ClienteService } from '../../services/domain/cliente.service';
 import { ClienteDTO } from '../../models/cliente.dto';
 import { PedidoDTO } from '../../models/pedido.dto';
 import { ProdutoService } from '../../services/domain/produto.service';
+import { StorageService } from '../../services/storage.service';
 
 @IonicPage()
 @Component({
@@ -17,51 +18,71 @@ import { ProdutoService } from '../../services/domain/produto.service';
 export class CartPage {
 
   items: CartItem[];
- 
-  clienteNome: ClienteDTO;
+
+  cliente:ClienteDTO;
   pedido: PedidoDTO;
- 
-  
+
+
   constructor(public navCtrl: NavController,
-             public navParams: NavParams,
-             public cartService:CartService,  
-             public clienteService: ClienteService,
-             public produtoService: ProdutoService ) {
+    public navParams: NavParams,
+    public cartService: CartService,
+    public storage: StorageService,
+    public clienteService: ClienteService,
+    public produtoService: ProdutoService) {
   }
 
-  ionViewDidLoad() { 
+  ionViewDidLoad() {
 
+
+    /*this.produtoService.findByCategoria(categoria_id,this.page, 10 )
+    .subscribe(response => {
+      this.items = this.items.concat(response['content']);
+      loader.dismiss();
+    },
+    error => {
+      loader.dismiss();
+    });*/
+
+
+    let usr = localStorage.getItem(STORAGE_KEYS.cliente);
+    this.clienteService.findById(usr)
+      .subscribe(response => {
+       // this.cliente = response as ClienteDTO;
+        this.cliente = response as ClienteDTO;
+      },
+        error => {
+        });
     let cart = this.cartService.getCart();
     this.items = cart.items;
 
   }
-  
-  removeItem(produto:ProdutoDTO){
+
+  removeItem(produto: ProdutoDTO) {
     this.items = this.cartService.removeProduto(produto).items;
   }
 
-  increaseQuantity(produto:ProdutoDTO){
- 
+  increaseQuantity(produto: ProdutoDTO) {
+
     this.items = this.cartService.increaseQuantity(produto).items;
-   console.log(this.items)
+
   }
-  
-  decreaseQuantity(produto:ProdutoDTO){
+
+  decreaseQuantity(produto: ProdutoDTO) {
     this.items = this.cartService.decreaseQuantity(produto).items;
   }
 
-  total():number {
+  total(): number {
     return this.cartService.total();
   }
 
-  goOn(){
-    this.navCtrl.setRoot('CategoriasPage');
+  goOn() {
+    this.navCtrl.setRoot('ProdutosPage');
 
   }
 
-  checkout(){
-  
-    this.navCtrl.push('PaymentPage',{pedido:this.pedido});
+  checkout() {
+
+    this.navCtrl.push('PaymentPage', { pedido: this.pedido });
 
   }
 

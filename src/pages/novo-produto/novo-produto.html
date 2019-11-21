@@ -1,0 +1,78 @@
+<ion-header>
+
+   
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+      
+      <ion-title *ngIf="!codpedido">Novo Produto</ion-title>
+      <ion-title *ngIf="codpedido">Produto Registrado</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding >
+   <div *ngIf="!codpedido">
+    <form [formGroup]="formGroup" (ngSubmit)="cadastrarProduto(); $event.preventDefault()">
+      <ion-item>
+        <ion-label stacked>Nome</ion-label>
+        <ion-input formControlName="nome" type="text"></ion-input>
+        <p class="danger" *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors" margin-left>Valor inválido</p>
+      </ion-item>
+     
+      <ion-item>
+        <ion-label stacked>Fornecedor</ion-label>
+        <ion-input formControlName="fornecedor" type="text"></ion-input>
+        <p class="danger" *ngIf="formGroup.controls.fornecedor.dirty && formGroup.controls.fornecedor.errors" margin-left>Valor inválido</p>
+      </ion-item>
+     
+      <ion-list radio-group formControlName="tamanho">
+          <ion-list-header>
+          Tamanho
+          </ion-list-header>
+          <ion-item>
+            <ion-label>P</ion-label>
+            <ion-radio checked="true" value="P"></ion-radio>
+          </ion-item>
+          <ion-item>
+              <ion-label>M</ion-label>
+              <ion-radio  value="M"></ion-radio>
+            </ion-item>
+          <ion-item>
+            <ion-label>G</ion-label>
+            <ion-radio value="G"></ion-radio>
+          </ion-item>
+        </ion-list>
+        <ion-item>
+        <ion-label stacked>Cor</ion-label>
+        <ion-input formControlName="cor" type="text"></ion-input>
+      </ion-item> 
+     
+      <ion-item>
+        <ion-label stacked>Preço de Compra</ion-label>
+     
+        <ion-input formControlName="precoCompra" type="number"></ion-input>
+      </ion-item>
+      <p class="danger" *ngIf="formGroup.controls.precoCompra.dirty && formGroup.controls.precoCompra.errors" margin-left>Valor inválido</p>
+      <ion-item>
+        <ion-label stacked>Preço de Venda</ion-label>
+        <ion-input formControlName="precoVenda" type="number"></ion-input>
+      </ion-item>
+      <p class="danger" *ngIf="formGroup.controls.precoVenda.dirty && formGroup.controls.precoVenda.errors" margin-left>Valor inválido</p>
+      
+      <button ion-button block type="submit" [disabled]="formGroup.invalid">Adicionar</button>
+    </form>
+   </div> 
+    <div *ngIf="codpedido">
+        <ion-card>
+            <ion-card-header>
+              Seu pedido foi registrado!
+            </ion-card-header>
+            <ion-item>
+              <h2>Código do produto: {{codpedido}}</h2>            
+            </ion-item>
+        </ion-card>
+    
+        <button ion-button block outline (click)="home()">Voltar</button>
+      </div>
+  </ion-content>

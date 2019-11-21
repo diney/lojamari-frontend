@@ -45,8 +45,7 @@ export class ClientesPage {
         //  this.getImageIfExists();
         },
         error => {
-          console.log(error.status)
-          if (error.status == 403) {
+            if (error.status == 403) {
             this.navCtrl.setRoot('HomePage');
           }
         });
@@ -68,24 +67,27 @@ export class ClientesPage {
     }
   }
 
-  showCategorias(cliente_id : string){
-    this
-    this.navCtrl.push('CategoriasPage', {cliente_id : cliente_id});
+  showProdutos(cliente_id : string){
+    
+    this.navCtrl.push('ProdutosPage');
     localStorage.setItem(STORAGE_KEYS.cliente,JSON.stringify(cliente_id));
    
     this.limpaCarinho();
   }
 
   limpaCarinho(){
-    this.cartService.createOrClearCart()
+    this.cartService.createOrClearCart();
   }
 
 
 
   novo() {
    // this.navCtrl.push('NovoClientePage');
-    this.navCtrl.setRoot('NovoClientePage');
+   // this.navCtrl.setRoot('NovoClientePage');
+    this.navCtrl.push('NovoClientePage');
   }
+
+  
 
 
   }

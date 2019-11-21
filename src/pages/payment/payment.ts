@@ -27,9 +27,6 @@ export class PaymentPage {
     public formBuilder: FormBuilder,
     public cartService:CartService,) {
 
-   // this.pedido = this.navParams.get('pedido');
-
-   
 
     this.formGroup = this.formBuilder.group({
       numeroDeParcelas: [1, Validators.required],
@@ -46,19 +43,15 @@ export class PaymentPage {
 
     let cliente = localStorage.getItem(STORAGE_KEYS.cliente);
     this.clienteService.findById(cliente).
-    subscribe(response=>{
-     
-
-     let cart = this.cartService.getCart();
-     console.log(cart.items)
-
+    subscribe(response=>{   
+     let cart = this.cartService.getCart();  
      this.pedido = {
        cliente: {id: response['id']},
        pagamento:null,
        itens:cart.items.map(x => {return {quantidade:x.quantidade,produto:{id:x.produto.id}}})
      }
     
-     console.log(this.pedido.itens) 
+    
     },
     error => {})
   }
@@ -67,6 +60,6 @@ export class PaymentPage {
    this.pedido.pagamento = this.formGroup.value;
    
     this.navCtrl.setRoot('OrderConfirmationPage', {pedido: this.pedido});
-    console.log(this.pedido.itens)
+    
   }
 }

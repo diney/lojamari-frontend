@@ -24,8 +24,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 errorObj = JSON.parse(errorObj);
             }
 
-            console.log("Erro detectado pelo interceptor:");
-            console.log(errorObj);
+            
 
             switch(errorObj.status) {
                 case 401:
@@ -65,9 +64,10 @@ export class ErrorInterceptor implements HttpInterceptor {
     }
 
     handle422(errorObj) {
+        console.log(errorObj.erros)
         let alert = this.alertCtrl.create({
             title: 'Erro 422: Validação',
-            message: this.listErrors(errorObj.errors),
+            message: "Email já existente",
             enableBackdropDismiss: false,
             buttons: [
                 {
@@ -93,10 +93,12 @@ export class ErrorInterceptor implements HttpInterceptor {
     }
 
     private listErrors(messages : FieldMessage[]) : string {
+        console.log(messages[0].fieldName)
         let s : string = '';
         for (var i=0; i<messages.length; i++) {
             s = s + '<p><strong>' + messages[i].fieldName + "</strong>: " + messages[i].message + '</p>';
         }
+        console.log(s)
         return s;
     }
 

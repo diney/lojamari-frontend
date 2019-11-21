@@ -10,9 +10,9 @@
 <ion-content padding>
     <ion-card>    
         <ion-card-content>
-          <ion-card-title>
+          <ion-card-title >
             <p>
-             {{clienteNome?.nome}}
+             {{cliente?.nome}}
             </p>
             </ion-card-title>
         
@@ -33,7 +33,7 @@
     </ion-item>
     <ion-item *ngIf="total() > 0">
       <h1>Total</h1>
-      <h1 item-end>{{total()}}</h1>
+      <h1 item-end>R$:{{total()}},00</h1>
     </ion-item>
     <ion-item *ngIf="total() <= 0">
       <h1>Seu carrinho está vazio</h1>

@@ -26,7 +26,7 @@ export class StorageService {
         }
         else {
        
-            console.log( JSON.stringify(obj))
+           
             localStorage.setItem(STORAGE_KEYS.localUser, JSON.stringify(obj));
         }
     }
@@ -54,6 +54,13 @@ export class StorageService {
             localStorage.removeItem(STORAGE_KEYS.cart);
         }
     }
+
+    renoveCliente() {    
+            
+        localStorage.removeItem(STORAGE_KEYS.cliente);
+      
+    }
+
 
 
     
