@@ -21,6 +21,8 @@ export class CartPage {
 
   cliente:ClienteDTO;
   pedido: PedidoDTO;
+  desconto:number;
+  valorDesc:number = 0 ;
 
 
   constructor(public navCtrl: NavController,
@@ -33,17 +35,6 @@ export class CartPage {
 
   ionViewDidLoad() {
 
-
-    /*this.produtoService.findByCategoria(categoria_id,this.page, 10 )
-    .subscribe(response => {
-      this.items = this.items.concat(response['content']);
-      loader.dismiss();
-    },
-    error => {
-      loader.dismiss();
-    });*/
-
-
     let usr = localStorage.getItem(STORAGE_KEYS.cliente);
     this.clienteService.findById(usr)
       .subscribe(response => {
@@ -55,6 +46,12 @@ export class CartPage {
     let cart = this.cartService.getCart();
     this.items = cart.items;
 
+  }
+  change(value){
+    this.total()
+    if (value.length>2){
+     this.desconto  = null;
+    }
   }
 
   removeItem(produto: ProdutoDTO) {
@@ -71,8 +68,15 @@ export class CartPage {
     this.items = this.cartService.decreaseQuantity(produto).items;
   }
 
+
   total(): number {
-    return this.cartService.total();
+    let total = this.cartService.total();
+    if(this.desconto>0){
+     
+      return total - (this.desconto/100* total);
+      
+    }
+    return total;
   }
 
   goOn() {
@@ -81,9 +85,18 @@ export class CartPage {
   }
 
   checkout() {
+    if(this.desconto == undefined){
+      this.desconto = 0;
+    }
+    
+    this.navCtrl.push('PaymentPage',{desconto:this.desconto});
 
-    this.navCtrl.push('PaymentPage', { pedido: this.pedido });
+  }
 
+  totalDesc(): number{
+    let total = this.cartService.total();
+    this.valorDesc = this.desconto/100* total;
+    return this.valorDesc ;
   }
 
 

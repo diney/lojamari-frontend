@@ -1,7 +1,7 @@
 import { RefDTO } from "./ref.dto";
 
 export interface ItemPedidoDTO { 
-    quantidade: number;
+    quantidade: number;    
     produto:RefDTO;
 
 }

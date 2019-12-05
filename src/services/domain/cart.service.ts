@@ -27,7 +27,7 @@ export class CartService {
         let cart = this.getCart();
         let position = cart.items.findIndex(x => x.produto.id == produto.id);
         if (position == -1) {
-            cart.items.push({quantidade: 1, produto: produto});
+            cart.items.push({quantidade: 1, produto: produto,desconto:0.0});
         }
         this.storage.setCart(cart);
         return cart;
@@ -74,5 +74,16 @@ export class CartService {
             sum += cart.items[i].produto.precoVenda * cart.items[i].quantidade;
         }
         return sum;
+    }
+
+    desconto(desc:number)  {
+        console.log(desc)
+        let cart = this.getCart();
+      
+        for (var i=0; i<cart.items.length; i++) {
+           cart.items[i].desconto = 10;
+           console.log( cart.items[i])
+        }
+       
     }
 }

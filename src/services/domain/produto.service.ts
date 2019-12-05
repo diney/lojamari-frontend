@@ -28,7 +28,10 @@ export class ProdutoService {
         }
     );
 }
+  cuontProd() {
+    return this.http.get(`${API_CONFIG.baseUrl}/produtos/count`);
 
+  }
 
 
   

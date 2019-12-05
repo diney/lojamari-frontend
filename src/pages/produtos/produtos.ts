@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Loading, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ProdutoDTO } from '../../models/produto.dto';
 import { ProdutoService } from '../../services/domain/produto.service';
 
@@ -13,6 +13,7 @@ export class ProdutosPage {
   items : ProdutoDTO[] = [];
   page : number= 0;
   produto: ProdutoDTO;
+  cuontProd:any
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -22,7 +23,12 @@ export class ProdutosPage {
 
   ionViewDidLoad() {    
    
-  
+     this.produtoService.cuontProd()
+    .subscribe(response =>{
+       this.cuontProd = response;
+      
+    })
+    
   }
 
   loadData(){

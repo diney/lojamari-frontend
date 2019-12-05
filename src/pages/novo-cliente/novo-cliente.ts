@@ -44,7 +44,7 @@ export class NovoClientePage {
 
 
   adicionar() {
-    
+    console.log(this.formGroup.value)
     this.clienteService.insert(this.formGroup.value)
       .subscribe(response => {
         this.codCliente = this.extractId(response.headers.get('location'));

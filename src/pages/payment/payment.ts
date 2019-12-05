@@ -20,6 +20,7 @@ export class PaymentPage {
 
   formGroup: FormGroup;
   items: CartItem[];
+  desconto: any;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -36,7 +37,7 @@ export class PaymentPage {
   }
 
   ionViewDidLoad() { 
-
+    this.desconto = this.navParams.get("desconto")
     let cart = this.cartService.getCart();
     this.items = cart.items;
 
@@ -48,7 +49,7 @@ export class PaymentPage {
      this.pedido = {
        cliente: {id: response['id']},
        pagamento:null,
-       itens:cart.items.map(x => {return {quantidade:x.quantidade,produto:{id:x.produto.id}}})
+       itens:cart.items.map(x => {return {quantidade:x.quantidade,produto:{id:x.produto.id},desconto:x.desconto=this.desconto}})
      }
     
     

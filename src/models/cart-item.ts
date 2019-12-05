@@ -1,6 +1,7 @@
 import {ProdutoDTO} from "./produto.dto";
 
 export interface CartItem{
-    quantidade: number,
+    quantidade: number, 
+    desconto:number,   
     produto: ProdutoDTO
 }

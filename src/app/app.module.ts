@@ -18,6 +18,7 @@ import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { ProdutoService } from '../services/domain/produto.service';
 import { CartService } from '../services/domain/cart.service';
 import { PedidoService } from '../services/domain/pedido.service';
+import { IonMaskModule } from '@pluritech/ion-mask';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { PedidoService } from '../services/domain/pedido.service';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    IonMaskModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
